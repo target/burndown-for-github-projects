@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm:start:db",
+      "type": "npm",
+      "script": "start:db",
+      "problemMatcher": {
+        "source": "Docker Compose",
+        "pattern": {
+          "regexp": ".+"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "File change detected",
+          "endsPattern": "Debugger listening on .+"
+        }
+      },
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "stop:db",
+      "label": "npm:stop:db"
+    }
+  ]
+}

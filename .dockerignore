@@ -1,0 +1,7 @@
+.env
+.env.sample
+node_modules/
+.git/
+build/
+data/
+docs/

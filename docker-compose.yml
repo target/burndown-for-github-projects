@@ -1,0 +1,35 @@
+services:
+  mongo_db:
+    image: mongo:4.4.6
+    command: mongod --quiet --logpath /dev/null
+    volumes:
+      - db-cache:/data/db
+
+  burndown:
+    depends_on:
+      - mongo_db
+    image: node:18.15.0-alpine
+    working_dir: /app
+    command: npm start
+    volumes:
+      - ./node_modules:/app/node_modules
+      - ./src:/app/src
+      - ./.env:/app/.env
+      - ./.burndownrc-sample.js:/app/.burndownrc.js
+      - ./package.json:/app/package.json
+      - ./tsconfig.json:/app/tsconfig.json
+    ports:
+      # Server port
+      - '8080:8080'
+      # Node.js inspect debug port
+      - '9229:9229'
+    environment:
+      DB_COLLECTION: sprints
+      DB_HOST: mongo_db
+      DB_NAME: burndown
+      DB_PORT: 27017
+
+volumes:
+  db-cache:
+    name: burndown_db_cache
+    driver: local

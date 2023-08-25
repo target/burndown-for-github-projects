@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "node",
+      "request": "attach",
+      "remoteRoot": "/app",
+      "port": 9229,
+      "restart": {
+        "delay": 1000,
+        "maxAttempts": 20
+      },
+
+      "preLaunchTask": "npm:start:db",
+      "postDebugTask": "npm:stop:db"
+    }
+  ]
+}
