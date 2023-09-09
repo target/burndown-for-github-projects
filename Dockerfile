@@ -2,7 +2,7 @@
 # built production code and dependencies, as opposed to including all source files,
 # build files, production dependencies, and development dependencies in one big image.
 
-FROM node:18.15.0-alpine@sha256:a3f2350bd3eb48525f801b57934300c11aa3610086b708854ab1c1045c018519 as build
+FROM node:20.6.0-alpine@sha256:c843f4a4060246a25f62c80b3d4cf4a6b4c4639cdce421e4f2ee3102257225b4 as build
 WORKDIR /app
 # Import source files and manifests
 COPY . .
@@ -11,7 +11,7 @@ RUN npm ci
 # Build TS -> JS
 RUN npm run build
 
-FROM node:18.15.0-alpine@sha256:a3f2350bd3eb48525f801b57934300c11aa3610086b708854ab1c1045c018519
+FROM node:20.6.0-alpine@sha256:c843f4a4060246a25f62c80b3d4cf4a6b4c4639cdce421e4f2ee3102257225b4
 WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
