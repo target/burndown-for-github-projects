@@ -41,7 +41,7 @@
     "mongodb": "6.0.0",
     "node-cron": "3.0.1",
     "uuid": "8.3.2",
-    "vega": "5.23.0"
+    "vega": "5.25.0"
   },
   "devDependencies": {
     "@types/color-convert": "2.0.0",
