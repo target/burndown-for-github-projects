@@ -7,13 +7,13 @@ import { getDataPlugin } from '../utils/getDataPlugin'
 
 export const fetchSprintData = async (): Promise<void> => {
   console.log(
-    `[${new Date().toLocaleString()}] Fetching sprint data for storage`
+    `[${new Date().toLocaleString()}] Fetching sprint data for storage`,
   )
 
   const dataPlugin = getDataPlugin()
 
   const currentSprint = await getSprintSummary(
-    env.GITHUB_DEFAULT_ORGANIZATION_NAME
+    env.GITHUB_DEFAULT_ORGANIZATION_NAME,
   )
 
   const newChartPoints = mapSprintToChartPoints(currentSprint)
@@ -24,7 +24,7 @@ export const fetchSprintData = async (): Promise<void> => {
 }
 
 export async function getHistoricalSprintData(
-  sprintId: string
+  sprintId: string,
 ): Promise<ChartPoint[]> {
   const dataPlugin = getDataPlugin()
 

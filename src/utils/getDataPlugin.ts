@@ -18,7 +18,7 @@ export const getDataPlugin = (): DataPlugin => {
 
   if (!pluginName) {
     console.warn(
-      'No data plugin name provided from configuration. Using default FileSystem plugin.'
+      'No data plugin name provided from configuration. Using default FileSystem plugin.',
     )
     const FileSystemDataPlugin = require('../dataPlugins/FileSystem').default
 
@@ -51,7 +51,7 @@ export const getDataPlugin = (): DataPlugin => {
     throw new Error(
       `Data plugin "${pluginName}" was not found. Plugin options:\n${pluginFiles
         .map((pluginFileName) => `"${pluginFileName}"`)
-        .join(', ')}`
+        .join(', ')}`,
     )
   }
 }

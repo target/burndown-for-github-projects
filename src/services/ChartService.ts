@@ -5,7 +5,7 @@ import convert from 'color-convert'
 
 export const createChart = async (
   data: ChartPoint[],
-  dimensions: ChartDimensions
+  dimensions: ChartDimensions,
 ): Promise<string> => {
   const chartSpec = createSpec(data, dimensions)
   const view = new VegaView(parse(chartSpec), {
@@ -19,7 +19,7 @@ export const createChart = async (
 
 const createSpec = (
   serieses: ChartPoint[],
-  dimensions: ChartDimensions
+  dimensions: ChartDimensions,
 ): VegaChartSpec => {
   const [width, height] = dimensions.split('x').map((d) => Number(d))
   const columnCount = serieses.reduce((columnNames, { c: columnName }) => {
@@ -265,7 +265,7 @@ const hsl2hex = (hue: number, saturation = 83, luminosity = 61) =>
   `#${convert.hsl.hex([hue, saturation, luminosity])}`
 
 export const mapSprintToChartPoints = (
-  sprintData: SprintSummary
+  sprintData: SprintSummary,
 ): ChartPoint[] => {
   const now = new Date()
   const chartData: ChartPoint[] = Object.entries(sprintData.columns).map(
@@ -273,7 +273,7 @@ export const mapSprintToChartPoints = (
       x: now,
       y: storyPoints,
       c: columnName,
-    })
+    }),
   )
   return chartData
 }

@@ -4,18 +4,18 @@ import supertest, { SuperTest, Test } from 'supertest'
 type Route = {
   handle: (
     req: Partial<Parameters<RequestHandler>[0]>,
-    res: Partial<Parameters<RequestHandler>[1]>
+    res: Partial<Parameters<RequestHandler>[1]>,
   ) => ReturnType<RequestHandler>
 }
 
 export const findRoute = (
   router: IRouter,
   method: string,
-  path: string
+  path: string,
 ): Route | undefined => {
   const r = router.stack.find(
     ({ route, regexp }) =>
-      regexp.test(path) && !!route.methods[method.toLowerCase()]
+      regexp.test(path) && !!route.methods[method.toLowerCase()],
   )
   return r
 }

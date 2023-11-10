@@ -38,13 +38,8 @@ describe('EnvService', () => {
   })
 
   it('sets up a default cron schedule', () => {
-    const [
-      minute,
-      hour,
-      dayOfMonth,
-      month,
-      dayOfWeek,
-    ] = env.CRON_SCHEDULE.split(' ')
+    const [minute, hour, dayOfMonth, month, dayOfWeek] =
+      env.CRON_SCHEDULE.split(' ')
 
     // Top of the hour
     expect(minute).toBe('0')

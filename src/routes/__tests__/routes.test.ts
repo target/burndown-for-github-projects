@@ -55,14 +55,14 @@ describe('routes/index.ts', () => {
       'uses %s to create a %s route',
       (routeFile, routePath) => {
         const matchedRoute = routes.find((route) =>
-          route.regexp.test(routePath)
+          route.regexp.test(routePath),
         )
         expect(matchedRoute).toBeDefined()
 
         // Remove the matched route from the list
         const matchedRouteIndex = routes.indexOf(matchedRoute)
         routes.splice(matchedRouteIndex, 1)
-      }
+      },
     )
 
     test('consumed all routes', () => {
@@ -112,7 +112,7 @@ module.exports = TestRoute
       path.extname(fileName) === '.js' ? jsFileContents : tsFileContents,
       {
         encoding: 'utf-8',
-      }
+      },
     )
   })
 }

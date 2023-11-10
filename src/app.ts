@@ -32,5 +32,5 @@ cron.schedule(
   },
   {
     timezone: env.CRON_TIMEZONE,
-  }
+  },
 )

@@ -48,7 +48,7 @@ class MongoDBPlugin implements DataPlugin {
       // create or find collection
       const hasCollection = db.listCollections(
         // TODO: improve this
-        (this.config.collection as unknown) as Document
+        this.config.collection as unknown as Document,
       )
 
       if (!hasCollection) {
@@ -73,7 +73,7 @@ class MongoDBPlugin implements DataPlugin {
       const rawData = await this.collection.find({ sprint }).toArray()
 
       const formattedData: ChartPointCollection = Object.fromEntries(
-        rawData.map(({ _id, ...chartPoint }) => [_id, chartPoint])
+        rawData.map(({ _id, ...chartPoint }) => [_id, chartPoint]),
       )
 
       return formattedData
@@ -81,7 +81,7 @@ class MongoDBPlugin implements DataPlugin {
       console.log(
         'Error while attempting to retrieve new record to database for sprint %s : %s ',
         sprint,
-        err.message
+        err.message,
       )
     }
   }
@@ -94,13 +94,13 @@ class MongoDBPlugin implements DataPlugin {
           _id: undefined,
           sprint,
           ...chartPoint,
-        }))
+        })),
       )
     } catch (err) {
       console.log(
         'Error while attempting to write new record to database for sprint %s : %s ',
         sprint,
-        err.message
+        err.message,
       )
     }
   }

@@ -143,7 +143,7 @@ describe('MongoDB Plugin', () => {
     })
 
     expect(mockCollection.insertMany).toHaveBeenCalledWith(
-      expectedNewSprintData
+      expectedNewSprintData,
     )
   })
 })

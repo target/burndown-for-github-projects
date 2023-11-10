@@ -3,5 +3,5 @@ export type PromiseResolveType<P extends Promise<unknown>> = Parameters<
 >[0]
 
 export type APIResolveType<
-  P extends Promise<{ data: unknown; [k: string]: unknown }>
+  P extends Promise<{ data: unknown; [k: string]: unknown }>,
 > = PromiseResolveType<P>['data']

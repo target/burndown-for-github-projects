@@ -12,10 +12,10 @@ if (envExists) {
 if (fs.existsSync('.env.sample')) {
   fs.copyFileSync('.env.sample', '.env')
   console.log(
-    `A .env was generated as none was found. Fill in blank values or the application will not run successfully.`
+    `A .env was generated as none was found. Fill in blank values or the application will not run successfully.`,
   )
 } else {
   console.log(
-    `No .env was found, and one could not be generated because '.env.sample' is not present to reference.`
+    `No .env was found, and one could not be generated because '.env.sample' is not present to reference.`,
   )
 }

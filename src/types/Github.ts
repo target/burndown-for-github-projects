@@ -3,7 +3,7 @@ import { APIResolveType } from './utility'
 
 type GithubApiResolveType<
   category extends keyof Octokit,
-  fx extends keyof Octokit[category]
+  fx extends keyof Octokit[category],
 > = Octokit[category][fx] extends (...args: any[]) => any
   ? APIResolveType<ReturnType<Octokit[category][fx]>>
   : never

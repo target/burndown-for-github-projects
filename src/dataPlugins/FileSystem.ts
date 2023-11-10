@@ -55,7 +55,7 @@ class FileSystemPlugin implements DataPlugin {
             sprint,
           },
         }),
-        {}
+        {},
       ),
     }
 
