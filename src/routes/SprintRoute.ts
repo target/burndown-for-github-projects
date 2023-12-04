@@ -25,7 +25,7 @@ SprintRoute.get('/:id?', async (req, res) => {
           ...agg,
           [k]: v.storyPoints,
         }),
-        {}
+        {},
       ),
     })
   } catch (err) {

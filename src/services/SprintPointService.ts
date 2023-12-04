@@ -12,7 +12,7 @@ import { StatusCodes } from 'http-status-codes'
 
 const getSprintBoard = async (
   organizationName: string,
-  sprintId?: number
+  sprintId?: number,
 ): Promise<SprintBoard> => {
   const sprintBoards = await getSprintBoards(organizationName)
 
@@ -49,7 +49,7 @@ export interface SprintSummary {
 
 export const getSprintSummary = async (
   organizationName: string,
-  sprintId?: number
+  sprintId?: number,
 ): Promise<SprintSummary> => {
   const currentSprint = await getSprintBoard(organizationName, sprintId)
   const currentSprintStoryPoints = await getSprintStoryPoints(currentSprint)
@@ -65,7 +65,7 @@ const getSprintStoryPoints = async (sprint: SprintBoard) => {
 
   const storyPoints = sumArrayProperties(
     Object.values(projectColumns),
-    'storyPoints'
+    'storyPoints',
   )
 
   return {
@@ -111,7 +111,7 @@ const getSprintBoards = async (organizationName: string) => {
     })
     .filter(
       (project: GithubProject | SprintBoard): project is SprintBoard =>
-        !!(project as SprintBoard).endDate
+        !!(project as SprintBoard).endDate,
     )
     .sort(({ endDate: a }, { endDate: b }) => {
       if (a > b) return 1
@@ -128,7 +128,7 @@ const getIssueFromCard = async (card: GithubProjectCard) => {
     return
   }
   const { data: issue }: { data: GithubIssue } = await octokit.request(
-    `GET ${card.content_url}`
+    `GET ${card.content_url}`,
   )
 
   return issue
@@ -152,12 +152,12 @@ const getSprintColumns = async (sprint: SprintBoard) => {
   const hydratedSprintColumns = await Promise.all(
     sprintColumns.map(
       async (
-        projectColumn
+        projectColumn,
       ): Promise<[string, SprintBoardColumnCardCollection]> => [
         projectColumn.name,
         await getSprintColumnCards(projectColumn),
-      ]
-    )
+      ],
+    ),
   )
 
   const out = createObjectFromEntryArray(hydratedSprintColumns)
@@ -165,16 +165,16 @@ const getSprintColumns = async (sprint: SprintBoard) => {
 }
 
 const createObjectFromEntryArray = <ObjectEntryArray extends [string, any][]>(
-  entries: ObjectEntryArray
+  entries: ObjectEntryArray,
 ): {
-  [k in typeof entries[number][0]]: typeof entries[number][1]
+  [k in (typeof entries)[number][0]]: (typeof entries)[number][1]
 } =>
   entries.reduce(
     (output: any, [key, value]: [string, any]) => ({
       ...output,
       [key]: value,
     }),
-    {}
+    {},
   )
 
 interface SprintBoardColumnCardCollection {
@@ -188,7 +188,7 @@ interface SprintBoardCard extends GithubProjectCard {
 }
 
 const getSprintColumnCards = async (
-  projectColumn: GithubProjectColumn
+  projectColumn: GithubProjectColumn,
 ): Promise<SprintBoardColumnCardCollection> => {
   const { data: cards } = await octokit.projects.listCards({
     column_id: projectColumn.id,
@@ -196,22 +196,20 @@ const getSprintColumnCards = async (
   })
 
   const hydratedCards = await Promise.all(
-    cards.map(
-      async (card): Promise<SprintBoardCard> => {
-        const issue = await getIssueFromCard(card)
+    cards.map(async (card): Promise<SprintBoardCard> => {
+      const issue = await getIssueFromCard(card)
 
-        let storyPoints = 0
-        if (issue) {
-          storyPoints = getIssueStoryPoints(issue)
-        }
-
-        return {
-          storyPoints,
-          issue,
-          ...card,
-        }
+      let storyPoints = 0
+      if (issue) {
+        storyPoints = getIssueStoryPoints(issue)
       }
-    )
+
+      return {
+        storyPoints,
+        issue,
+        ...card,
+      }
+    }),
   )
 
   const storyPoints = sumArrayProperties(hydratedCards, 'storyPoints')
@@ -226,7 +224,7 @@ type MapObject = Record<string, any>
 
 const sumArrayProperties = (
   arrayOfObjects: MapObject[],
-  propertyPath: string
+  propertyPath: string,
 ) =>
   arrayOfObjects.reduce((total, item) => {
     const points = Number(getProperty(item, propertyPath) || 0)

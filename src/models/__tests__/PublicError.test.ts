@@ -88,12 +88,12 @@ describe('new PublicError(...)', () => {
   })
 
   it('applies a status and message during handle() (as a number)', () => {
-    const res = ({
+    const res = {
       status: jest.fn(function status() {
         return this
       }),
       send: jest.fn(),
-    } as unknown) as Response
+    } as unknown as Response
     const err = new PublicError({
       status: StatusCodes.UNPROCESSABLE_ENTITY,
       message: 'Nope',

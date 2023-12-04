@@ -14,7 +14,7 @@ describe('OctokitService', () => {
     expect(Octokit).toHaveBeenCalledWith(
       expect.objectContaining({
         baseUrl: env.GITHUB_API_URL,
-      })
+      }),
     )
   })
 
@@ -22,7 +22,7 @@ describe('OctokitService', () => {
     expect(Octokit).toHaveBeenCalledWith(
       expect.objectContaining({
         auth: 'a1b2c3d4e5',
-      })
+      }),
     )
   })
 })

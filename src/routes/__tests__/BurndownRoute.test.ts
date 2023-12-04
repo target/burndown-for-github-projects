@@ -20,7 +20,7 @@ import {
 jest.mock('../../services/ChartService', () => ({
   createChart: jest.fn(),
   mapSprintToChartPoints: jest.fn(
-    jest.requireActual('../../services/ChartService').mapSprintToChartPoints
+    jest.requireActual('../../services/ChartService').mapSprintToChartPoints,
   ),
 }))
 const createChart = baseCreateChart as jest.Mock
@@ -35,7 +35,7 @@ const getHistoricalSprintData = baseGetHistoricalSprintData as jest.Mock
 describe('BurndownRoute', () => {
   afterEach(() => {
     jest.clearAllMocks()
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
     jest.setSystemTime(new Date(2021, 3, 1))
   })
 
@@ -46,7 +46,7 @@ describe('BurndownRoute', () => {
 
     expect(getSprintSummary).not.toHaveBeenCalledWith(
       expect.anything(),
-      expect.anything() // <-- The sprint ID would be here
+      expect.anything(), // <-- The sprint ID would be here
     )
   })
 
@@ -58,7 +58,7 @@ describe('BurndownRoute', () => {
 
     expect(getSprintSummary).toHaveBeenCalledWith('The-Even-Cooler-Kids')
     expect(getHistoricalSprintData).toHaveBeenCalledWith(
-      expect.stringMatching(/^The-Even-Cooler-Kids-/)
+      expect.stringMatching(/^The-Even-Cooler-Kids-/),
     )
   })
 
@@ -100,7 +100,7 @@ describe('BurndownRoute', () => {
     await request(BurndownRoute).get('/').send()
 
     expect(getHistoricalSprintData).toHaveBeenCalledWith(
-      expect.stringMatching(/-763$/)
+      expect.stringMatching(/-763$/),
     )
   })
 
@@ -239,7 +239,7 @@ describe('BurndownRoute', () => {
         { c: 'To Do', x: new Date('2021-12-31'), y: 0 },
         { c: 'Done', x: new Date('2021-12-31'), y: 15 },
       ],
-      expect.anything()
+      expect.anything(),
     )
   })
 

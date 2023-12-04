@@ -18,7 +18,7 @@ BurndownRoute.get('/', async (req, res) => {
     const sprintSummary = await getSprintSummary(organization)
     const newChartData = mapSprintToChartPoints(sprintSummary)
     const historicalChartData = await getHistoricalSprintData(
-      `${organization}-${sprintSummary.id}`
+      `${organization}-${sprintSummary.id}`,
     )
     let endOfSprintData: ChartPoint[] = []
 
@@ -31,7 +31,7 @@ BurndownRoute.get('/', async (req, res) => {
             y: isLastSprintColumn ? sprintSummary.storyPoints : 0,
             c: sprintColumnName,
           }
-        }
+        },
       )
     }
 

@@ -8,11 +8,11 @@ jest.mock('../OctokitService')
 
 const octokit = {
   projects: {
-    listForOrg: (baseOctokit.projects.listForOrg as unknown) as jest.Mock,
-    listColumns: (baseOctokit.projects.listColumns as unknown) as jest.Mock,
-    listCards: (baseOctokit.projects.listCards as unknown) as jest.Mock,
+    listForOrg: baseOctokit.projects.listForOrg as unknown as jest.Mock,
+    listColumns: baseOctokit.projects.listColumns as unknown as jest.Mock,
+    listCards: baseOctokit.projects.listCards as unknown as jest.Mock,
   },
-  request: (baseOctokit.request as unknown) as jest.Mock,
+  request: baseOctokit.request as unknown as jest.Mock,
 }
 
 describe('SprintPointService', () => {
@@ -43,7 +43,7 @@ describe('SprintPointService', () => {
     expect(octokit.projects.listForOrg).toHaveBeenCalledWith(
       expect.objectContaining({
         org: 'Test-Org',
-      })
+      }),
     )
   })
 
@@ -59,7 +59,7 @@ describe('SprintPointService', () => {
     expect(async () => {
       await getSprintSummary('Test-Org')
     }).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"No active sprints were found. Validate project is not closed"`
+      `"No active sprints were found. Validate project is not closed"`,
     )
   })
 
@@ -106,7 +106,7 @@ describe('SprintPointService', () => {
     expect(async () => {
       await getSprintSummary('My-Org', 12)
     }).rejects.toMatchInlineSnapshot(
-      `[PublicError: No active sprint was found by ID 12. Validate project 1) name matches "Sprint \\d+ - (?<end_date>\\d+/\\d+/\\d+)"; 2) is not closed]`
+      `[PublicError: No active sprint was found by ID 12. Validate project 1) name matches "Sprint \\d+ - (?<end_date>\\d+/\\d+/\\d+)"; 2) is not closed]`,
     )
   })
 
@@ -120,7 +120,7 @@ describe('SprintPointService', () => {
     expect(octokit.projects.listColumns).toHaveBeenCalledWith(
       expect.objectContaining({
         project_id: 321,
-      })
+      }),
     )
   })
 
@@ -141,10 +141,10 @@ describe('SprintPointService', () => {
 
     expect(octokit.projects.listCards).toHaveBeenCalledTimes(2)
     expect(octokit.projects.listCards).toHaveBeenCalledWith(
-      expect.objectContaining({ column_id: 1 })
+      expect.objectContaining({ column_id: 1 }),
     )
     expect(octokit.projects.listCards).toHaveBeenCalledWith(
-      expect.objectContaining({ column_id: 2 })
+      expect.objectContaining({ column_id: 2 }),
     )
   })
 
@@ -319,14 +319,14 @@ describe('SprintPointService', () => {
 
     octokit.request.mockImplementation(
       async (
-        requestPath: `GET foo.bar/issues/${number}`
+        requestPath: `GET foo.bar/issues/${number}`,
       ): Promise<{
         data: { labels: { name: number }[] }
       }> => ({
         data: {
           labels: [{ name: points[requestPath.replace('GET ', '')] }],
         },
-      })
+      }),
     )
 
     const { storyPoints, columns } = await getSprintSummary('Test-Org')

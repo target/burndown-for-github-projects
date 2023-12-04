@@ -46,7 +46,7 @@ describe('HistoricalDataService', () => {
     await fetchSprintData()
 
     expect(getSprintSummary).toHaveBeenCalledWith(
-      env.GITHUB_DEFAULT_ORGANIZATION_NAME
+      env.GITHUB_DEFAULT_ORGANIZATION_NAME,
     )
   })
 

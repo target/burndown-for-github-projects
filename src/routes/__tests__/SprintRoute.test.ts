@@ -74,7 +74,7 @@ describe('SprintRoute', () => {
 
     expect(getSprintSummary).toHaveBeenCalledWith(
       'The-Even-Cooler-Kids',
-      undefined
+      undefined,
     )
     expect(res.body).toStrictEqual({
       foo: 'bar 4',

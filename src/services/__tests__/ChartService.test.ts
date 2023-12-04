@@ -39,7 +39,7 @@ describe('ChartService', () => {
           c: 'Done',
         },
       ],
-      '100x100'
+      '100x100',
     )
 
     const schema = parse.mock.calls[0][0]
@@ -67,10 +67,10 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
       expect(columnColorScale.range).toMatchInlineSnapshot(`
-        Array [
+        [
           "#347D9D",
         ]
       `)
@@ -83,10 +83,10 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
       expect(columnColorScale.range).toMatchInlineSnapshot(`
-        Array [
+        [
           "#EE4949",
           "#347D9D",
         ]
@@ -100,11 +100,11 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
 
       expect(columnColorScale.range).toMatchInlineSnapshot(`
-        Array [
+        [
           "#EE4949",
           "#49EE49",
           "#347D9D",
@@ -124,11 +124,11 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
 
       expect(columnColorScale.range).toMatchInlineSnapshot(`
-        Array [
+        [
           "#EE4949",
           "#EEDD49",
           "#49EE49",
@@ -150,11 +150,11 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
 
       expect(columnColorScale.range).toMatchInlineSnapshot(`
-        Array [
+        [
           "#EE4949",
           "#EE9C49",
           "#D9EE49",
@@ -180,7 +180,7 @@ describe('ChartService', () => {
 
       const schema = parse.mock.calls[0][0]
       const columnColorScale = schema.scales.find(
-        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal'
+        ({ type: scaleType }: { type: string }) => scaleType === 'ordinal',
       )
 
       columnColorScale.range.forEach((color: string) => {
@@ -195,7 +195,7 @@ describe('ChartService', () => {
     const schema = parse.mock.calls[0][0]
 
     const rule = schema.marks.find(
-      ({ type: markType }: { type: string }) => markType === 'rule'
+      ({ type: markType }: { type: string }) => markType === 'rule',
     )
 
     expect(rule.encode.enter).toMatchObject({
@@ -224,7 +224,7 @@ describe('ChartService', () => {
       expect.objectContaining({
         width: 250,
         height: 300,
-      })
+      }),
     )
   })
 

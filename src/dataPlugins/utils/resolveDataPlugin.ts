@@ -23,14 +23,14 @@ export const resolveDataPlugin = (
 
   const pluginFile = pluginFiles.find(
     (pluginFileName) =>
-      pluginFileName.toLowerCase() === pluginName.toLowerCase()
+      pluginFileName.toLowerCase() === pluginName.toLowerCase(),
   )
 
   if (!pluginFile) {
     throw new Error(
       `Data plugin "${pluginName}" was not found. Plugin options:\n${pluginFiles
         .map((pluginFileName) => `"${pluginFileName}"`)
-        .join(', ')}`
+        .join(', ')}`,
     )
   }
 
@@ -41,8 +41,7 @@ export const resolveDataPlugin = (
   return new Plugin(pluginConfig)
 }
 
-const { type: dataPluginType, config: dataPluginConfig } = cosmiconfigSync(
-  'burndown'
-).search().config.dataPlugin
+const { type: dataPluginType, config: dataPluginConfig } =
+  cosmiconfigSync('burndown').search().config.dataPlugin
 
 resolveDataPlugin(dataPluginType, dataPluginConfig) as DataPlugin
