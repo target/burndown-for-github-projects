@@ -1,3 +1,5 @@
+> ⚠️ Burndown for GitHub Projects is archived. [Visualization features](https://docs.github.com/en/issues/planning-and-tracking-with-projects/viewing-insights-from-your-project/creating-charts) now provide built-in functionality for GitHub projects.
+
 # Burndown for GitHub Projects
 
 ![Sample burndown graph](./docs/sample-burndown.svg)
